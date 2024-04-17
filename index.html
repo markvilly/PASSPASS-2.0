@@ -4,93 +4,136 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.cdnfonts.com/css/helvetica-neue-55"
+      rel="stylesheet"
+    />
+    <link href="/hamburgers/dist/hamburgers.css" rel="stylesheet" />
 
     <title>PassPass</title>
   </head>
   <body>
     <header class="main-header">
-        <nav class="main-nav">
-            <h1 class="logo">Pass Pass</h1>
-            <ul class="nav-items">
-                <li class="nav-item"><a href="http://">CONTACT</a> </li>
-                <li class="nav-item"><a href="http://">PROJECTS</a> </li>
-                <li class="nav-item"><a href="http://">ABOUT</a> </li>
-            </ul>
-        </nav>
-      </header>
-      
+      <nav class="main-nav">
+        <h1 class="logo">passpass</h1>
+        <button class="hamburger" type="button">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+
+        <ul class="nav-items">
+          <li class="nav-item"><a href="http://">CONTACT</a></li>
+          <li class="nav-item"><a href="http://">PROJECTS</a></li>
+          <li class="nav-item"><a href="http://">ABOUT</a></li>
+        </ul>
+      </nav>
+    </header>
+
     <main id="main-content">
       <section id="panel-side">
+        <!-- image template -->
+        <div class="slide-show">
+          <img src="/mobile-bg.png" alt="" srcset="" />
+        </div>
         <div class="video-container">
-            <video src="" controls alt="this is where the Video will be embedded.">
-                <p>This is the side where the user can scroll and flow through the
-                    information.</p>
-            </video>
+          <video
+            src=""
+            controls
+            alt="this is where the Video will be embedded."
+          >
+            <p>
+              This is the side where the user can scroll and flow through the
+              information.
+            </p>
+          </video>
         </div>
       </section>
       <section id="page-content">
-        
+        <div class="music-player">
+          <audio src="/If only U.wav" loop autoplay controls></audio>
+        </div>
+
         <div class="landing-page">
-          <h1>Empowering artists, voices.</h1>
-          <p>
+          <div class="circle-yello"></div>
+          <h1 class="landing-head">Empowering artists, voices.</h1>
+          <p class="landing-paragraph">
             From booking your first gig to managing finances on the road, we've
             got you covered every step of the way.
           </p>
           <div class="buttons">
-            <button class="get-started btn btn-primary">Sign me up!</button>
+            <button class="get-started btn btn-primary">
+              SIGN UP FOR WAITING LIST
+            </button>
             <button class="share-story btn btn-secondary">
-              Share my story
+              SHARE MY STORY
             </button>
           </div>
         </div>
         <div id="spotlight">
-          <h3>Spotlight</h3>
-          <video src="" width="400" controls></video>
+          <h3 class="spotlight-title">SPOTLIGHT</h3>
+          <video src="" controls class="spotlight-video"></video>
         </div>
         <div id="supporters">
           <h3>Our Supporters</h3>
-          <svg width="400"</svg>
+          <svg width="400px"></svg>
         </div>
         <div id="essentials">
-          <h3>The Essential Resources for Your Musical Journey</h3>
-          <p>Welcome to the heart of your touring success. Our collection covers every aspect of touring, from planning and promotion to on-the-road essentials. Download the below PDFs to get started.</p>
+          <h3 class="heading essentials-head">
+            The Essential Resources for Your Musical Journey
+          </h3>
+          <p class="ess-para">
+            Welcome to the heart of your touring success. Our collection covers
+            every aspect of touring, from planning and promotion to on-the-road
+            essentials. Download the below PDFs to get started.
+          </p>
           <div class="essentials-btns">
             <button type="button pdf pdf1">pdf1</button>
             <button type="button pdf pdf2">pdf2</button>
           </div>
         </div>
-        <article id="tips">
+        <figure id="tips">
+          <div class="tips-bg"></div>
+          <figcaption>
             <h3>Tips & Insights From Experienced Artists</h3>
-            <p>Some featured advice from some of our seasoned artists across the globe.</p>
-            
-        </article>
-        <article id="panel-disc">
-            <h3>Catch Up With our panel Discussions</h3>
-            <p>Engage with our panel discussions to learn from experts and gain industry insight.</p>
-        </article>
-        <article id="collab-projects">
-            <h3>Ongoing Collaborative Projects</h3>
-            <p>Some featured advice from  our seasoned artists across the globe.</p>
-        </article>
+            <p>
+              Some featured advice from some of our seasoned artists across the
+              globe.
+            </p>
+          </figcaption>
+        </figure>
+        <figure id="panel-disc">
+          <h3>Catch Up With our panel Discussions</h3>
+          <p>
+            Engage with our panel discussions to learn from experts and gain
+            industry insight.
+          </p>
+        </figure>
+        <figure id="collab-projects">
+          <h3>Ongoing Collaborative Projects</h3>
+          <p>
+            Some featured advice from our seasoned artists across the globe.
+          </p>
+        </figure>
         <article id="footer">
-            <div class="left-footer">
-                <h4>Need help?</h4>
-                <h4>Victim of profiling?</h4>
-                <h4>Schengen Visa?</h4>
-                <h4>Write to us</h4>
-                <h4>hello@passpass.com</h4>
-                <button type="button">go up</button>
-            </div>
-            <div class="right-footer">
-                <h4>Let's talk</h4>
-                <ul class="socials">
-                    <li class="social">Instagram</li>
-                    <li class="social">LinkedIn</li>
-                    <li class="social">Facebook</li>
-                </ul>
-                <span>Privacy</span>
-                <span>&copy; Mark Paul Designs ;D </span>
-            </div>
+          <div class="left-footer">
+            <h4>Need help?</h4>
+            <h4>Victim of profiling?</h4>
+            <h4>Schengen Visa?</h4>
+            <h4>Write to us</h4>
+            <h4>hello@passpass.com</h4>
+            <button type="button">go up</button>
+          </div>
+          <div class="right-footer">
+            <h4>Let's talk</h4>
+            <ul class="socials">
+              <li class="social">Instagram</li>
+              <li class="social">LinkedIn</li>
+              <li class="social">Facebook</li>
+            </ul>
+            <span>Privacy</span>
+            <span>&copy; Mark Paul Designs ;D </span>
+          </div>
         </article>
       </section>
     </main>
