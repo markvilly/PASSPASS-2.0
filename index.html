@@ -50,8 +50,20 @@
         </div>
       </section>
       <section id="page-content">
-        <div class="music-player">
-          <audio src="/If only U.wav" loop autoplay controls></audio>
+        <div class="outer-audio-wrapper">
+          <div class="audio-player-container">
+            <!-- <audio src="/If only U.wav" loop autoplay controls></audio> -->
+            <!-- <p>Audio Player</p> -->
+            <button class="play-button" id="play-icon"></button>
+            <span id="current-time" class="time">0:00</span>
+            <input type="range" id="seek-slide" max="100" value="0">
+            <span id="duration" class="time">0:00</span>
+          </div>
+          <div class="volume">
+            <output id="volume-output">100</output>
+            <input type="range" id="volume-slider" max="100" value="100">
+            <button id="mute-icon"></button>
+          </div>
         </div>
 
         <div class="landing-page">
@@ -76,7 +88,13 @@
         </div>
         <div id="supporters">
           <h3>Our Supporters</h3>
-          <svg width="400px"></svg>
+          <div class="supporters-logos">
+            <svg class="circle"></svg>
+            <svg class="circle"></svg>
+            <svg class="circle"></svg>
+            <svg class="circle"></svg>
+          </div>
+          <div class="line-up"></div>
         </div>
         <div id="essentials">
           <h3 class="heading essentials-head">
@@ -88,55 +106,70 @@
             essentials. Download the below PDFs to get started.
           </p>
           <div class="essentials-btns">
-            <button type="button pdf pdf1">pdf1</button>
-            <button type="button pdf pdf2">pdf2</button>
+            <div class="artwork">
+              <img src="/PDF-artwork.svg" alt="" srcset="" />
+            </div>
+            <button type="button" class="pdf pdf1">
+              <img src="/PDF LOGO.svg" alt="" srcset="" />
+            </button>
+            <button type="button" class="pdf pdf2">
+              <img src="/PDF LOGO 2.svg" alt="" srcset="" />
+            </button>
           </div>
+
+          <div class="line-up"></div>
         </div>
-        <figure id="tips">
-          <div class="tips-bg"></div>
-          <figcaption>
-            <h3>Tips & Insights From Experienced Artists</h3>
+        <section id="currated-content">
+          <figure id="tips">
+            <div class="tips-bg"></div>
+            <figcaption>
+              <h3>Tips & Insights From Experienced Artists</h3>
+              <p>
+                Some featured advice from some of our seasoned artists across
+                the globe.
+              </p>
+            </figcaption>
+          </figure>
+          <figure id="panel-disc">
+            <h3>Catch Up With our panel Discussions</h3>
             <p>
-              Some featured advice from some of our seasoned artists across the
-              globe.
+              Engage with our panel discussions to learn from experts and gain
+              industry insight.
             </p>
-          </figcaption>
-        </figure>
-        <figure id="panel-disc">
-          <h3>Catch Up With our panel Discussions</h3>
-          <p>
-            Engage with our panel discussions to learn from experts and gain
-            industry insight.
-          </p>
-        </figure>
-        <figure id="collab-projects">
-          <h3>Ongoing Collaborative Projects</h3>
-          <p>
-            Some featured advice from our seasoned artists across the globe.
-          </p>
-        </figure>
+          </figure>
+          <figure id="collab-projects">
+            <h3>Ongoing Collaborative Projects</h3>
+            <p>
+              Some featured advice from our seasoned artists across the globe.
+            </p>
+          </figure>
+        </section>
         <article id="footer">
           <div class="left-footer">
             <h4>Need help?</h4>
             <h4>Victim of profiling?</h4>
-            <h4>Schengen Visa?</h4>
-            <h4>Write to us</h4>
-            <h4>hello@passpass.com</h4>
-            <button type="button">go up</button>
+            <h4 class="visa">Schengen Visa?</h4>
+            <div class="h5-headers">
+              <h5 class="h5-1">Write to us</h4>
+                <h5 class="h5-2">hello@passpass.com</h4>
+            </div>
           </div>
           <div class="right-footer">
             <h4>Let's talk</h4>
             <ul class="socials">
-              <li class="social">Instagram</li>
-              <li class="social">LinkedIn</li>
-              <li class="social">Facebook</li>
+              <button class="social">Instagram</button>
+              <button class="social">LinkedIn</button>
+              <button class="social">Facebook</button>
             </ul>
-            <span>Privacy</span>
+            <button class="go-up" type="button">go up</button>
+            <div class="copyright">
+              <span>Privacy</span>
             <span>&copy; Mark Paul Designs ;D </span>
+            </div>
           </div>
         </article>
       </section>
     </main>
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
   </body>
 </html>
