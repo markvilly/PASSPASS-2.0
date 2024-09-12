@@ -313,13 +313,13 @@ div {
     }
     button.pdf2 {
       position: absolute;
-      top: 193px;
-      left: 127px;
+      top: 80%;
+      left: 40%;
     }
     button.pdf1 {
       position: absolute;
-      top: 6px;
-      left: 163px;
+      top: 4%;
+      left: 50%;
     }
 
     .artwork {
