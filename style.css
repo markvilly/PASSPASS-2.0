@@ -673,5 +673,19 @@ input[type="range"]:active::-ms-thumb {
   background: #007db5;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 480px) {
+  /* LANDING HEADER */
+  .landing-head {
+    font-size: 54pt !important;
+  }
+  .landing-paragraph {
+    font-size: 16pt !important;
+  }
+
+  .buttons {
+    button.btn {
+      padding: 20px;
+      font-size: 12pt;
+    }
+  }
 }
