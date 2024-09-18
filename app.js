@@ -192,16 +192,6 @@ playIconContainer.addEventListener("click", () => {
   }
 });
 
-muteIconContainer.addEventListener("click", () => {
-  if (muteState === "unmute") {
-    muteAnimation.playSegments([0, 15], true);
-    muteState = "mute";
-  } else {
-    muteAnimation.playSegments([15, 25], true);
-    muteState = "unmute";
-  }
-});
-
 const showRangeProgress = (rangeInput) => {
   if (rangeInput === seekSlider)
     audioPlayerContainer.style.setProperty(
@@ -289,5 +279,30 @@ seekSlider.addEventListener("change", () => {
   audio.currentTime = seekSlider.value;
   if (!audio.paused) {
     requestAnimationFrame(whilePlaying);
+  }
+});
+
+/* Implementing functionality to the volume button.*/
+
+const outputContainer = document.getElementById("volume-output");
+volumeSlider.addEventListener("input", (e) => {
+  const value = e.target.value;
+
+  outputContainer.textContent = value;
+  audio.volume = value / 100;
+});
+
+/* MUTE BUTTON SETTINGS. */
+
+muteIconContainer.addEventListener("click", () => {
+  if (muteState === "unmute") {
+    muteAnimation.playSegments([0, 15], true);
+    audio.muted = true;
+
+    muteState = "mute";
+  } else {
+    muteAnimation.playSegments([15, 25], true);
+    audio.muted = false;
+    muteState = "unmute";
   }
 });
