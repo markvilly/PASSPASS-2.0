@@ -403,8 +403,9 @@ div {
     margin: 0 20px;
 
     .social {
-      /* display: inline-block; */
-      padding: 3px 14px;
+      display: block;
+      padding: 13px 0;
+      width: 30%;
       background-color: #d9d9d9;
       border: 1px solid #2e2e2e;
       border-radius: 55px;
@@ -415,7 +416,8 @@ div {
 
   .go-up {
     display: block;
-    padding: 6px 40px;
+    padding: 16px 40px;
+    font-size: 14pt;
     margin: 40px auto;
     color: #ffd600;
     background-color: #2e2e2e;
@@ -687,5 +689,48 @@ input[type="range"]:active::-ms-thumb {
       padding: 20px;
       font-size: 12pt;
     }
+  }
+
+  .section-header {
+    font-size: 30pt;
+  }
+
+  #supporters {
+    .supporters-logos {
+      margin: 0 30px;
+    }
+  }
+
+  #essentials {
+    & .essentials-btns {
+      & button.pdf2 {
+        left: 43%;
+      }
+    }
+  }
+
+  .right-footer {
+    & .socials {
+      & .social {
+        padding: 13px 17px;
+        margin: 0 auto;
+        width: 25%;
+      }
+    }
+  }
+
+  .right-footer {
+    & .go-up {
+      padding: 16px 40px;
+      font-size: 12pt;
+    }
+  }
+
+  .left-footer h4 {
+    font-size: 20pt;
+  }
+
+  .left-footer h5 {
+    font-size: 16pt;
   }
 }
