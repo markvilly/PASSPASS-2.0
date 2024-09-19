@@ -200,6 +200,7 @@ body {
   position: relative;
   .landing-head {
     font-size: 38pt;
+    text-align: center;
     margin: 100px 20px;
   }
 
@@ -733,4 +734,8 @@ input[type="range"]:active::-ms-thumb {
   .left-footer h5 {
     font-size: 16pt;
   }
+}
+
+/* iPAD */
+@media screen and (min-width: 768px) {
 }
