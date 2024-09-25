@@ -219,7 +219,7 @@ body {
     font-size: 12pt;
     line-height: 1.4;
     margin: 0 20px;
-    text-align: justify;
+    text-align: center;
     color: #2e2e2e;
     padding-bottom: 100px;
   }
@@ -738,4 +738,88 @@ input[type="range"]:active::-ms-thumb {
 
 /* iPAD */
 @media screen and (min-width: 768px) {
+  .landing-head {
+    font-size: 70pt !important;
+  }
+
+  .buttons {
+    & button.btn {
+      padding: 34px;
+      font-size: 12pt;
+    }
+  }
+
+  #supporters {
+    & .circle {
+      width: 90px;
+      height: 90px;
+    }
+  }
+
+  #essentials {
+    & .essentials-btns {
+      & button.pdf1 {
+        position: absolute;
+        top: 4%;
+        left: 50%;
+      }
+    }
+  }
+
+  #essentials {
+    & .essentials-btns {
+      & button.pdf2 {
+        left: 46%;
+      }
+    }
+  }
+
+  .section-header {
+    font-size: 36pt;
+  }
+
+  .left-footer h4 {
+    font-size: 28pt;
+  }
+
+  .h5-headers {
+    position: absolute;
+    left: 50%;
+    margin-left: -173px;
+    margin-top: 40px;
+  }
+
+  .left-footer h5 {
+    font-size: 26pt;
+    text-align: center;
+  }
+
+  .right-footer {
+    background-color: #d9d9d9;
+    padding-top: 156px;
+    padding-bottom: 100px;
+  }
+
+  .right-footer {
+    & .socials {
+      & .social {
+        padding: 13px 17px;
+        margin: 0 auto;
+        width: 28%;
+        font-size: 16pt;
+      }
+    }
+  }
+
+  .right-footer {
+    & h4 {
+      font-size: 16pt;
+    }
+  }
+
+  #essentials {
+    & .ess-para {
+      font-size: 16pt;
+    }
+  }
 }
