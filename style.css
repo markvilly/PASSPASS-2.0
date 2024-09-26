@@ -887,5 +887,6 @@ input[type="range"]:active::-ms-thumb {
   .main-header {
     position: fixed;
     z-index: 1001;
+    width: 100%;
   }
 }
