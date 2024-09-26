@@ -889,4 +889,18 @@ input[type="range"]:active::-ms-thumb {
     z-index: 1001;
     width: 100%;
   }
+
+  .nav-items {
+    background: #e7e7e7;
+  }
+
+  .buttons {
+    flex-direction: row !important;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .landing-page {
+    padding-bottom: 90px;
+  }
 }
