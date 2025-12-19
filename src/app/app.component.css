@@ -1,0 +1,43 @@
+/* Main content styles */
+#main-content {
+  overflow: hidden;
+}
+
+#panel-side {
+  .slide-show {
+    min-width: 319px;
+    img {
+      width: 100%;
+      object-fit: cover;
+      object-position: 10% 20%;
+    }
+  }
+}
+
+.video-container {
+  display: none;
+}
+
+@media screen and (min-width: 1440px) {
+  #main-content {
+    display: flex;
+    flex-direction: row;
+  }
+
+  #panel-side {
+    width: 100%;
+    .slide-show {
+      width: 100%;
+    }
+  }
+  #page-content {
+    width: 100%;
+  }
+
+  .slide-show {
+    position: fixed;
+    width: 50% !important;
+    z-index: 1000;
+  }
+}
+
