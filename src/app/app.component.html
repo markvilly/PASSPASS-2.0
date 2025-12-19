@@ -1,4 +1,5 @@
-<app-header></app-header>
+<app-header (openSubscribe)="openSubscribe()"></app-header>
+<app-subscribe [isOpen]="subscribeOpen" (close)="subscribeOpen = false"></app-subscribe>
 
 <main id="main-content">
   <section id="panel-side">
@@ -16,7 +17,7 @@
   </section>
   <section id="page-content">
     <app-audio-player></app-audio-player>
-    <app-landing></app-landing>
+    <app-landing (openSubscribe)="openSubscribe()"></app-landing>
     <app-spotlight></app-spotlight>
     <app-supporters></app-supporters>
     <app-essentials></app-essentials>

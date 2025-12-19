@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-landing',
@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   templateUrl: './landing.component.html'
 })
 export class LandingComponent {
+  @Output() openSubscribe = new EventEmitter<void>();
+
+  onOpenSubscribe(): void {
+    this.openSubscribe.emit();
+  }
 }
 

@@ -1,5 +1,19 @@
 <div id="spotlight">
-  <h3 class="section-header spotlight-title">Spotlight</h3>
-  <video src="" controls class="spotlight-video"></video>
+  <h3 class="section-header spotlight-title size-20">Spotlight</h3>
+  <div class="video-placeholder-container">
+    <video #videoElement src="" controls class="spotlight-video"></video>
+    @if (showPlaceholder) {
+    <div class="video-placeholder">
+      <div class="placeholder-icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M23 7l-7 5 7 5V7z"/>
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+        </svg>
+      </div>
+      <p class="placeholder-text">Video Coming Soon</p>
+      <p class="placeholder-subtext">Stay tuned for exciting content</p>
+    </div>
+    }
+  </div>
 </div>
 

@@ -315,6 +315,108 @@ div {
 
 .spotlight-video {
   width: 100%;
+  display: block;
+  background-color: #f5f5f5;
+  min-height: 400px;
+}
+
+.video-placeholder-container {
+  position: relative;
+  width: 100%;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 400px;
+}
+
+.video-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  z-index: 1;
+  padding: 40px 20px;
+}
+
+.video-placeholder-container video:not([src]),
+.video-placeholder-container video[src=""] {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+}
+
+.placeholder-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #2e2e2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  color: #ffffff;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.placeholder-icon:hover {
+  transform: scale(1.1);
+  background-color: #ffd600;
+  color: #2e2e2e;
+}
+
+.placeholder-icon svg {
+  width: 40px;
+  height: 40px;
+}
+
+.placeholder-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2e2e2e;
+  margin: 0 0 8px 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.placeholder-subtext {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+@media screen and (min-width: 768px) {
+  .spotlight-video {
+    min-height: 500px;
+  }
+  
+  .video-placeholder-container {
+    min-height: 500px;
+  }
+  
+  .placeholder-icon {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .placeholder-icon svg {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .placeholder-text {
+    font-size: 24px;
+  }
+  
+  .placeholder-subtext {
+    font-size: 16px;
+  }
 }
 
 #essentials {
@@ -367,8 +469,17 @@ div {
 #currated-content {
   display: none;
 }
+
+#footer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .left-footer {
   position: relative;
+  flex: 1;
+  width: 100%;
 }
 
 .cta {
@@ -401,6 +512,8 @@ div {
   background-color: #d9d9d9;
   padding-top: 100px;
   padding-bottom: 100px;
+  flex: 1;
+  width: 100%;
 
   h4 {
     margin-top: 50px;
@@ -462,9 +575,9 @@ div {
 
 .play-button {
   position: absolute;
-  top: 20px;
-  right: 50%;
-  transform: translateX(50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1000;
 }
 
@@ -536,7 +649,9 @@ path {
 
 .outer-audio-wrapper {
   position: fixed;
-  bottom: -100px;
+  bottom: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   height: 150px;
   background: linear-gradient(135deg, 
@@ -545,24 +660,28 @@ path {
     rgba(255, 255, 0, 0.1) 100%);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  margin: 50px 0% 50px 0%;
   z-index: 999;
   border-top: 2px solid rgba(255, 255, 255, 0.3);
   box-shadow: 
     0 -5px 30px rgba(255, 0, 255, 0.3),
     0 -5px 30px rgba(0, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
 }
 
 .volume {
   position: absolute;
-  top: 40px;
-  right: 0px;
-  width: 40%;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding-right: 20px;
+  padding-right: 0;
 }
 
 .audio-player-container {
@@ -571,6 +690,7 @@ path {
   justify-content: space-between;
   padding: 0 20px;
   width: 100%;
+  max-width: 1200px;
   height: 90px;
   background: linear-gradient(135deg, 
     rgba(255, 0, 255, 0.15) 0%, 
@@ -584,7 +704,6 @@ path {
     inset 0 0 20px rgba(255, 255, 255, 0.2),
     0 0 30px rgba(255, 0, 255, 0.2),
     0 0 30px rgba(0, 255, 255, 0.2);
-  top: 475px;
   z-index: 99;
   position: relative;
   gap: 15px;
@@ -611,12 +730,12 @@ path {
 
 #seek-slide {
   position: absolute;
-  top: -29px;
-  left: 0%;
-  margin-left: 0;
-  margin-right: 0;
+  top: -20px;
+  left: 0;
+  right: 0;
+  margin: 0;
   z-index: 99;
-  width: 100%;
+  width: calc(100% - 40px);
   padding: 0 20px;
 }
 
@@ -1112,12 +1231,8 @@ input[type="range"]:hover::-ms-thumb {
 
   .outer-audio-wrapper {
     width: 50%;
-    background: linear-gradient(135deg, 
-      rgba(255, 0, 255, 0.15) 0%, 
-      rgba(0, 255, 255, 0.15) 50%, 
-      rgba(255, 255, 0, 0.15) 100%);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    left: 50%;
+    right: auto;
   }
 
   .slide-show {
@@ -1144,5 +1259,216 @@ input[type="range"]:hover::-ms-thumb {
 
   .landing-page {
     padding-bottom: 90px;
+  }
+
+  #footer {
+    flex-direction: row;
+  }
+
+  .left-footer {
+    width: 50%;
+  }
+
+  .right-footer {
+    width: 50%;
+  }
+}
+
+/* SUBSCRIBE COMPONENT */
+.subscribe-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  animation: fadeIn 0.3s ease;
+}
+
+.subscribe-container {
+  width: 50%;
+  max-width: 600px;
+  background-color: #ffc0cb;
+  min-height: 100vh;
+  position: relative;
+  padding: 40px;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.4s ease;
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  transition: transform 0.2s ease;
+  z-index: 10;
+}
+
+.close-button:hover {
+  transform: scale(1.1);
+}
+
+.close-button svg {
+  width: 24px;
+  height: 24px;
+}
+
+.subscribe-content {
+  margin-top: 20px;
+}
+
+.subscribe-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 30px;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.subscribe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-bottom: 2px solid #000;
+  background-color: transparent;
+  color: #000;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+  border-bottom-color: #ffd600;
+}
+
+.form-input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+  border: 2px solid #000;
+  border-radius: 4px;
+  padding: 12px;
+}
+
+.form-textarea:focus {
+  border-color: #ffd600;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  padding-right: 40px;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #000;
+}
+
+.subscribe-button {
+  margin-top: 20px;
+  padding: 14px 32px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  align-self: center;
+  min-width: 150px;
+}
+
+.subscribe-button:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+}
+
+.subscribe-button:active {
+  transform: translateY(0);
+}
+
+@media screen and (max-width: 768px) {
+  .subscribe-container {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .subscribe-title {
+    font-size: 20px;
+  }
+  
+  .subscribe-container {
+    padding: 30px 20px;
   }
 }
