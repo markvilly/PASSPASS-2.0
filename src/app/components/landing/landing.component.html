@@ -1,15 +1,17 @@
-<div class="section-header landing-page relative">
-  <div class="circle-yello absolute w-[400px] h-[400px] rounded-full bg-primary opacity-34 -top-20 -right-48 -z-10"></div>
-  <h1 class="landing-head text-left text-4xl md:text-7xl my-24 mx-5">Empowering <br>artists, <br> Amplifying <br> voices.</h1>
-  <p class="landing-paragraph text-lg md:text-base leading-relaxed mx-5 text-center text-heading pb-24">
+<div class="section-header landing-page relative pt-16">
+  <div class="circle-yello absolute w-[400px] h-[400px] rounded-full bg-primary opacity-34 -top-20 -right-48 -z-10 blur-3xl"></div>
+  <h3 class="text-[130px] px-16 text-left font-extralight" style="font-family: 'Clash Display', sans-serif;">
+  Empowering <br><span #artistsSpan class=" font-bold absolute ">Artists,</span> <br> Amplifying <br> <b><span class="italic font-medium">Voices.</span></b>
+ </h3>
+  <p class=" text-left text-[24pt] text-gray-500 pl-16 font-extralight pb-24" style="font-family: Helvetica, sans-serif;">
     From booking your first gig to managing finances on the road, we've
     got you covered every step of the way.
   </p>
-  <div class="buttons flex flex-col md:flex-row items-center justify-center gap-5 mb-24">
-    <button class="get-started btn btn-primary inline-block cursor-pointer p-2 mb-2.5 bg-primary border-none rounded border border-heading hover:opacity-90 transition-opacity" (click)="onOpenSubscribe()">
-      <span class="no-underline font-bold text-heading">JOIN WAITING LIST</span>
+  <div class="pl-20 flex flex-col md:flex-row items-center justify-start gap-5 mb-24">
+    <button class="p-8 border-2 cursor-pointer  bg-primary  hover:opacity-90" (click)="onOpenSubscribe()">
+      <span class="no-underline text-[32px]  text-heading">JOIN WAITING LIST</span>
     </button>
-    <button class="share-story btn btn-secondary inline-block cursor-pointer w-70 p-2 mb-2.5 bg-white border-none rounded border border-heading hover:opacity-90 transition-opacity font-bold">
+    <button class="p-8 text-[32px] cursor-pointer   bg-white border-2 hover:opacity-90 ">
       SHARE MY STORY
     </button>
   </div>
