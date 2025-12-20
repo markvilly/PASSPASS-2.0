@@ -2,8 +2,6 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } fr
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-declare var lottie: any;
-
 @Component({
   selector: 'app-audio-player',
   standalone: true,
@@ -12,30 +10,27 @@ declare var lottie: any;
 })
 export class AudioPlayerComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('audioElement') audioElement!: ElementRef<HTMLAudioElement>;
-  @ViewChild('playIconContainer') playIconContainer!: ElementRef<HTMLButtonElement>;
-  @ViewChild('muteIconContainer') muteIconContainer!: ElementRef<HTMLButtonElement>;
-  @ViewChild('audioPlayerContainer') audioPlayerContainer!: ElementRef<HTMLDivElement>;
   @ViewChild('seekSlider') seekSlider!: ElementRef<HTMLInputElement>;
   @ViewChild('volumeSlider') volumeSlider!: ElementRef<HTMLInputElement>;
-  @ViewChild('currentTimeDisplay') currentTimeDisplay!: ElementRef<HTMLSpanElement>;
-  @ViewChild('durationDisplay') durationDisplay!: ElementRef<HTMLSpanElement>;
-  @ViewChild('volumeOutput') volumeOutput!: ElementRef<HTMLOutputElement>;
 
   playState: string = 'play';
   muteState: string = 'unmute';
   currentTime: string = '0:00';
   duration: string = '0:00';
-  volume: number = 100;
+  volume: number = 50;
   seekValue: number = 0;
   maxSeek: number = 100;
   bufferedWidth: string = '0%';
   seekBeforeWidth: string = '0%';
-  volumeBeforeWidth: string = '100%';
+  volumeBeforeWidth: string = '50%';
+  isShuffle: boolean = false;
+  isRepeat: boolean = false;
+  songTitle: string = 'AJIONA';
+  songArtist: string = 'Amateur Lover';
 
-  private playAnimation: any;
-  private muteAnimation: any;
   private raf: number | null = null;
   private audio: HTMLAudioElement | null = null;
+  private isSeeking: boolean = false;
 
   ngOnInit(): void {
     // Initialize values
@@ -43,7 +38,12 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.audio = this.audioElement.nativeElement;
-    this.initializeLottieAnimations();
+    
+    // Initialize audio volume
+    if (this.audio) {
+      this.audio.volume = this.volume / 100;
+    }
+    
     this.setupAudioListeners();
     this.setupSliderListeners();
   }
@@ -51,45 +51,6 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.raf !== null) {
       cancelAnimationFrame(this.raf);
-    }
-    if (this.playAnimation) {
-      this.playAnimation.destroy();
-    }
-    if (this.muteAnimation) {
-      this.muteAnimation.destroy();
-    }
-  }
-
-  private async initializeLottieAnimations(): Promise<void> {
-    try {
-      // Use dynamic import for lottie-web
-      const lottieWebModule = await import('lottie-web');
-      const lottieWeb = lottieWebModule.default || lottieWebModule;
-      
-      if (this.playIconContainer?.nativeElement) {
-        this.playAnimation = lottieWeb.loadAnimation({
-          container: this.playIconContainer.nativeElement,
-          path: 'https://maxst.icons8.com/vue-static/landings/animated-icons/icons/pause/pause.json',
-          renderer: 'svg',
-          loop: false,
-          autoplay: false,
-          name: 'Play Animation',
-        });
-        this.playAnimation.goToAndStop(14, true);
-      }
-
-      if (this.muteIconContainer?.nativeElement) {
-        this.muteAnimation = lottieWeb.loadAnimation({
-          container: this.muteIconContainer.nativeElement,
-          path: 'https://maxst.icons8.com/vue-static/landings/animated-icons/icons/mute/mute.json',
-          renderer: 'svg',
-          loop: false,
-          autoplay: false,
-          name: 'Mute Animation',
-        });
-      }
-    } catch (error) {
-      console.error('Error loading Lottie animations:', error);
     }
   }
 
@@ -99,24 +60,29 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.audio.readyState > 0) {
       this.displayDuration();
       this.setSliderMax();
-      this.displayBufferedAmount();
     } else {
       this.audio.addEventListener('loadedmetadata', () => {
         this.displayDuration();
         this.setSliderMax();
-        this.displayBufferedAmount();
       });
     }
 
-    this.audio.addEventListener('progress', () => {
-      this.displayBufferedAmount();
+    this.audio.addEventListener('timeupdate', () => {
+      if (this.audio && !this.isSeeking) {
+        this.seekValue = Math.floor(this.audio.currentTime);
+        this.currentTime = this.calculateTime(this.audio.currentTime);
+      }
     });
 
-    this.audio.addEventListener('timeupdate', () => {
-      if (this.audio) {
-        this.seekValue = Math.floor(this.audio.currentTime);
-        this.updateSeekProgress();
+    this.audio.addEventListener('ended', () => {
+      if (!this.isRepeat) {
+        this.playState = 'play';
+        this.stopAnimationFrame();
       }
+    });
+
+    this.audio.addEventListener('error', (e) => {
+      console.error('Audio error:', e);
     });
   }
 
@@ -129,17 +95,13 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.audio) return;
 
     if (this.playState === 'play') {
-      this.audio.play();
-      if (this.playAnimation) {
-        this.playAnimation.playSegments([14, 27], true);
-      }
+      this.audio.play().catch((error) => {
+        console.error('Error playing audio:', error);
+      });
       this.startAnimationFrame();
       this.playState = 'pause';
     } else {
       this.audio.pause();
-      if (this.playAnimation) {
-        this.playAnimation.playSegments([0, 14], true);
-      }
       this.stopAnimationFrame();
       this.playState = 'play';
     }
@@ -149,48 +111,71 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.audio) return;
 
     if (this.muteState === 'unmute') {
-      if (this.muteAnimation) {
-        this.muteAnimation.playSegments([0, 15], true);
-      }
       this.audio.muted = true;
       this.muteState = 'mute';
     } else {
-      if (this.muteAnimation) {
-        this.muteAnimation.playSegments([15, 25], true);
-      }
       this.audio.muted = false;
       this.muteState = 'unmute';
     }
   }
 
-  onSeekInput(value: number): void {
-    this.seekValue = value;
-    this.currentTime = this.calculateTime(value);
-    this.updateSeekProgress();
+  skipBackward(): void {
+    if (!this.audio) return;
+    this.audio.currentTime = Math.max(0, this.audio.currentTime - 10);
+  }
+
+  skipForward(): void {
+    if (!this.audio) return;
+    this.audio.currentTime = Math.min(this.audio.duration, this.audio.currentTime + 10);
+  }
+
+  toggleShuffle(): void {
+    this.isShuffle = !this.isShuffle;
+  }
+
+  toggleRepeat(): void {
+    this.isRepeat = !this.isRepeat;
+    if (this.audio) {
+      this.audio.loop = this.isRepeat;
+    }
+  }
+
+  onSeekInput(value: string | number): void {
+    this.isSeeking = true;
+    const numValue = typeof value === 'string' ? parseFloat(value) : value;
+    this.seekValue = Math.floor(numValue);
+    this.currentTime = this.calculateTime(this.seekValue);
     if (this.audio && !this.audio.paused) {
       this.stopAnimationFrame();
     }
   }
 
-  onSeekChange(value: number): void {
+  onSeekChange(value: string | number): void {
     if (this.audio) {
-      this.audio.currentTime = value;
+      const numValue = typeof value === 'string' ? parseFloat(value) : value;
+      this.audio.currentTime = numValue;
+      this.seekValue = Math.floor(numValue);
+      this.currentTime = this.calculateTime(numValue);
+      this.isSeeking = false;
       if (!this.audio.paused) {
         this.startAnimationFrame();
       }
     }
   }
 
-  onVolumeInput(value: number): void {
-    this.volume = value;
-    this.volumeBeforeWidth = `${value}%`;
-    this.updateVolumeProgress();
+  onVolumeInput(value: string | number): void {
+    const numValue = typeof value === 'string' ? parseFloat(value) : value;
+    this.volume = Math.round(numValue);
+    this.volumeBeforeWidth = `${this.volume}%`;
     if (this.audio) {
-      this.audio.volume = value / 100;
+      this.audio.volume = this.volume / 100;
     }
   }
 
   private calculateTime(secs: number): string {
+    if (isNaN(secs) || !isFinite(secs)) {
+      return '0:00';
+    }
     const minutes = Math.floor(secs / 60);
     const seconds = Math.floor(secs % 60);
     const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
@@ -198,55 +183,23 @@ export class AudioPlayerComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private displayDuration(): void {
-    if (this.audio) {
+    if (this.audio && this.audio.duration) {
       this.duration = this.calculateTime(this.audio.duration);
     }
   }
 
   private setSliderMax(): void {
-    if (this.audio) {
+    if (this.audio && this.audio.duration) {
       this.maxSeek = Math.floor(this.audio.duration);
     }
   }
 
-  private displayBufferedAmount(): void {
-    if (!this.audio || this.maxSeek === 0 || !this.audioPlayerContainer) return;
-
-    const bufferedAmount = Math.floor(
-      this.audio.buffered.end(this.audio.buffered.length - 1)
-    );
-    this.bufferedWidth = `${(bufferedAmount / this.maxSeek) * 100}%`;
-    this.audioPlayerContainer.nativeElement.style.setProperty(
-      '--buffered-width',
-      this.bufferedWidth
-    );
-  }
-
-  private updateSeekProgress(): void {
-    if (this.maxSeek > 0 && this.audioPlayerContainer) {
-      this.seekBeforeWidth = `${(this.seekValue / this.maxSeek) * 100}%`;
-      this.audioPlayerContainer.nativeElement.style.setProperty(
-        '--seek-before-width',
-        this.seekBeforeWidth
-      );
-    }
-  }
-
-  private updateVolumeProgress(): void {
-    if (this.audioPlayerContainer) {
-      this.audioPlayerContainer.nativeElement.style.setProperty(
-        '--volume-before-width',
-        this.volumeBeforeWidth
-      );
-    }
-  }
-
   private startAnimationFrame(): void {
+    this.stopAnimationFrame();
     const whilePlaying = () => {
-      if (this.audio && !this.audio.paused) {
+      if (this.audio && !this.audio.paused && !this.isSeeking) {
         this.seekValue = Math.floor(this.audio.currentTime);
-        this.currentTime = this.calculateTime(this.seekValue);
-        this.updateSeekProgress();
+        this.currentTime = this.calculateTime(this.audio.currentTime);
         this.raf = requestAnimationFrame(whilePlaying);
       }
     };

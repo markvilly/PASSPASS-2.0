@@ -6,6 +6,7 @@ import { SpotlightComponent } from './components/spotlight/spotlight.component';
 import { SupportersComponent } from './components/supporters/supporters.component';
 import { EssentialsComponent } from './components/essentials/essentials.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { SubscribeComponent } from './components/subscribe/subscribe.component';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +18,21 @@ import { FooterComponent } from './components/footer/footer.component';
     SpotlightComponent,
     SupportersComponent,
     EssentialsComponent,
-    FooterComponent
+    FooterComponent,
+    SubscribeComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'PassPass';
+  subscribeOpen = false;
+
+  openSubscribe(): void {
+    this.subscribeOpen = true;
+  }
+
+  closeSubscribe(): void {
+    this.subscribeOpen = false;
+  }
 }

@@ -1,5 +1,19 @@
-<div id="spotlight">
-  <h3 class="section-header spotlight-title">Spotlight</h3>
-  <video src="" controls class="spotlight-video"></video>
+<div id="spotlight" class="">
+  <h3 class="text-[150px] font-extralight" style="font-family: 'Clash Display', sans-serif;">SPOTLIGHT</h3> 
+  <div class="video-placeholder-container" style="font-family: 'Clash Display', sans-serif;">
+    <video #videoElement src="" controls class="spotlight-video"></video>
+    @if (showPlaceholder) {
+    <div class="video-placeholder" style="font-family: 'Clash Display', sans-serif;">
+      <div class="placeholder-icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M23 7l-7 5 7 5V7z"/>
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+        </svg>
+      </div>
+      <p class="placeholder-text" style="font-family: 'Clash Display', sans-serif;">Video Coming Soon</p>
+      <p class="placeholder-subtext" style="font-family: 'Clash Display', sans-serif;">Stay tuned for exciting content</p>
+    </div>
+    }
+  </div>
 </div>
 
